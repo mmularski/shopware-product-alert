@@ -5,8 +5,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
+        <!-- Snippet definition -->
         <service id="ProductAlert\Resources\snippet\en_GB\SnippetFile_en_GB" public="true">
             <tag name="shopware.snippet.file"/>
+        </service>
+
+        <!-- Entity definition -->
+        <service id="ProductAlert\ProductAlert\ProductAlertEntityDefinition">
+            <tag name="shopware.entity.definition" entity="product_alert" />
         </service>
     </services>
 </container>
