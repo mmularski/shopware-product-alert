@@ -15,13 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProductAlert
- *
- * @RouteScope(scopes={"api"})
  */
 class ProductAlert extends AbstractController
 {
     /**
-     * @Route("/api/v{version}/product/alert/sign", name="api.action.product.alert.sign", methods={"POST"})
+     * @Route("/sales-channel-api/v{version}/product/alert/sign", name="sales-channel-api.action.product.alert.sign",
+     *     methods={"POST"})
+     * @RouteScope(scopes={"sales-channel-api"})
      *
      * @param Request $request
      * @param Context $context
@@ -30,6 +30,8 @@ class ProductAlert extends AbstractController
      */
     public function signIn(Request $request, Context $context): JsonResponse
     {
-        return new JsonResponse('OK');
+        $email = $request->get('email');
+
+        return new JsonResponse($email);
     }
 }

@@ -8,25 +8,31 @@
         {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
         {% set product = page.product %}
 
-        {% if product.stock <= 0 %}
+        {% if product.stock >= 0 %}
+
+            {% set productAlertOptions = {
+                productId: product.id,
+                productName: product.name
+            } %}
+
             <br>
             <div class="product-detail-product-alert">
                 <form id="productDetailPageOutOfStockForm"
-                      action="{% block page_product_detail_product_alert_form_action %}{{ path('frontend.checkout.line-item.add') }}{% endblock %}"
+                      action="{% block page_product_detail_product_alert_form_action %}{{ path('sales-channel-api.action.product.alert.sign', {'version': 1}) }}{% endblock %}"
                       method="post"
                       class="buy-widget"
-                      data-add-to-cart="true">
+                      data-product-alert="true"
+                      data-product-alert-options="{{ productAlertOptions|json_encode }}">
 
                     <div class="form-row">
                         <div class="col-8">
                             <input type="email"
                                    class="form-control{% if formViolations.getViolations('/email') is not empty %} is-invalid{% endif %}"
                                    autocomplete="section-personal email"
-                                   id="personalMail"
+                                   id="email"
                                    placeholder="{{ "account.personalMailPlaceholder"|trans|striptags }}"
                                    name="email"
-                                   value="{{ data.get('email') }}"
-                                   required="required">
+                                   required="required"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-primary btn-block btn-buy"
