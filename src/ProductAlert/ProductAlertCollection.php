@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
 /**
- * @package  development
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package  ProductAlert\Controller
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
+
+namespace ProductAlert\ProductAlert;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 
