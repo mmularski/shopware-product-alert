@@ -7,6 +7,7 @@ import Plugin from 'src/plugin-system/plugin.class';
 import DomAccess from 'src/helper/dom-access.helper';
 import FormSerializeUtil from 'src/utility/form/form-serialize.util';
 import HttpClient from 'src/service/http-client.service';
+import ButtonLoadingIndicator from 'src/utility/loading-indicator/button-loading-indicator.util';
 
 export default class ProductAlert extends Plugin {
     static options = {
@@ -18,11 +19,12 @@ export default class ProductAlert extends Plugin {
         /**
          * @type string
          */
-        prodictName: ''
+        productName: ''
     };
 
     init() {
         this._getForm();
+        this._getSubmitButton();
 
         if (!this._form) {
             throw new Error(`No form found for the plugin: ${this.constructor.name}`);
@@ -47,6 +49,18 @@ export default class ProductAlert extends Plugin {
         }
     }
 
+    /**
+     * tries to get the submit button fo the form
+     *
+     * @returns {HTMLElement|boolean}
+     * @private
+     */
+    _getSubmitButton() {
+        this._submitButton = DomAccess.querySelector(this._form, 'button[type=submit]');
+
+        return true;
+    }
+
     _registerEvents() {
         this.el.addEventListener('submit', this._formSubmit.bind(this));
     }
@@ -57,6 +71,8 @@ export default class ProductAlert extends Plugin {
      */
     _formSubmit(event) {
         event.preventDefault();
+
+        this._displayLoader();
 
         const requestUrl = DomAccess.getAttribute(this._form, 'action');
         const formData = FormSerializeUtil.serialize(this._form);
@@ -75,5 +91,19 @@ export default class ProductAlert extends Plugin {
 
     _responseCallback(response) {
         console.log(response);
+
+        this._stopLoader();
+    }
+
+    _displayLoader() {
+        if (!this._loader) {
+            this._loader = new ButtonLoadingIndicator(this._submitButton, 'beforeend');
+        }
+
+        this._loader.create();
+    }
+
+    _stopLoader() {
+        this._loader.remove();
     }
 }

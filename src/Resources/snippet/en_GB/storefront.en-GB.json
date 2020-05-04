@@ -1,5 +1,7 @@
 {
-  "detail": {
-    "snipText": "TEST SNIPPET"
+  "productAlert": {
+    "successSign": "Successfully signed to product stock notification!",
+    "signInText": "Sign in",
+    "formInfo": "Notify me when product is back to stock"
   }
 }

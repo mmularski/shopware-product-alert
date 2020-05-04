@@ -17,6 +17,14 @@
 
             <br>
             <div class="product-detail-product-alert">
+                <div class="product-detail-ordernumber-container">
+                    {% block page_product_detail_product_alert_form_info %}
+                        <span class="product-detail-ordernumber">
+                            {{ "productAlert.formInfo"|trans|sw_sanitize }}
+                        </span>
+                    {% endblock %}
+                </div>
+
                 <form id="productDetailPageOutOfStockForm"
                       action="{% block page_product_detail_product_alert_form_action %}{{ path('sales-channel-api.action.product.alert.sign', {'version': 1}) }}{% endblock %}"
                       method="post"
@@ -35,10 +43,10 @@
                                    required="required"/>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-primary btn-block btn-buy"
-                                    title="{{ "detail.snipText"|trans|striptags }}"
-                                    aria-label="{{ "detail.snipText"|trans|striptags }}">
-                                {{ "detail.snipText"|trans|sw_sanitize }}
+                            <button type=submit class="btn btn-primary btn-block btn-buy"
+                                    title="{{ "productAlert.signInText"|trans|striptags }}"
+                                    aria-label="{{ "productAlert.signInText"|trans|striptags }}">
+                                {{ "productAlert.signInText"|trans|sw_sanitize }}
                             </button>
                         </div>
                     </div>
