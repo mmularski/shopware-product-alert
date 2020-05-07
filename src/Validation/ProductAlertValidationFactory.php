@@ -7,6 +7,7 @@
  * @license See LICENSE_DIVANTE.txt for license details.
  */
 
+use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\Validation\EntityExists;
 use Shopware\Core\Framework\Validation\DataValidationDefinition;
 use Shopware\Core\Framework\Validation\DataValidationFactoryInterface;
@@ -22,7 +23,7 @@ class ProductAlertValidationFactory implements DataValidationFactoryInterface
     {
         $definition = new DataValidationDefinition('product_alert.create');
 
-        //$this->buildCommonValidation($definition, $context);
+        $this->buildCommonValidation($definition, $context);
 
         return $definition;
     }
@@ -31,17 +32,17 @@ class ProductAlertValidationFactory implements DataValidationFactoryInterface
     {
         $definition = new DataValidationDefinition('product_alert.update');
 
-//        $this->buildCommonValidation($definition, $context)
-//            ->add(
-//                'id',
-//                new NotBlank(),
-//                new EntityExists(
-//                    [
-//                        'context' => $context->getContext(),
-//                        'entity' => 'product_alert',
-//                    ]
-//                )
-//            );
+        $this->buildCommonValidation($definition, $context)
+            ->add(
+                'id',
+                new NotBlank(),
+                new EntityExists(
+                    [
+                        'context' => $context->getContext(),
+                        'entity' => 'product_alert',
+                    ]
+                )
+            );
 
         return $definition;
     }
@@ -51,24 +52,33 @@ class ProductAlertValidationFactory implements DataValidationFactoryInterface
      */
     private function buildCommonValidation(DataValidationDefinition $definition, $context): DataValidationDefinition
     {
-//        if ($context instanceof SalesChannelContext) {
-//            $frameworkContext = $context->getContext();
-//        } else {
-//            $frameworkContext = $context;
-//        }
-//
-//        $definition
-//            ->add('salutationId', new EntityExists(['entity' => 'salutation', 'context' => $frameworkContext]))
-//            ->add('countryId', new EntityExists(['entity' => 'country', 'context' => $frameworkContext]))
-//            ->add('countryStateId', new EntityExists(['entity' => 'country_state', 'context' => $frameworkContext]))
-//            ->add('salutationId', new NotBlank())
-//            ->add('firstName', new NotBlank())
-//            ->add('lastName', new NotBlank())
-//            ->add('street', new NotBlank())
-//            ->add('zipcode', new NotBlank())
-//            ->add('city', new NotBlank())
-//            ->add('countryId', new NotBlank());
-//
-//        return $definition;
+        if ($context instanceof SalesChannelContext) {
+            $frameworkContext = $context->getContext();
+        } else {
+            $frameworkContext = $context;
+        }
+
+        $definition
+            ->add(
+                'salesChannelId',
+                new EntityExists(
+                    [
+                        'entity' => 'sales_channel',
+                        'context' => $frameworkContext,
+                    ]
+                )
+            )
+            ->add(
+                'productId',
+                new EntityExists(
+                    [
+                        'entity' => 'product',
+                        'context' => $frameworkContext,
+                    ]
+                )
+            )
+            ->add('email', new NotBlank());
+
+        return $definition;
     }
 }

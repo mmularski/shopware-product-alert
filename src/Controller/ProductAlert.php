@@ -6,6 +6,7 @@
 
 namespace ProductAlert\Controller;
 
+use Shopware\Core\Checkout\Customer\SalesChannel\AddressService;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +19,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductAlert extends AbstractController
 {
+    /**
+     * @var AddressService
+     */
+    private $addressService;
+
+    /**
+     * ProductAlert constructor.
+     *
+     * @param AddressService $addressService
+     */
+    public function __construct(AddressService $addressService)
+    {
+        $this->addressService = $addressService;
+    }
+
     /**
      * @Route("/sales-channel-api/v{version}/product/alert/sign", name="sales-channel-api.action.product.alert.sign",
      *     methods={"POST"})
