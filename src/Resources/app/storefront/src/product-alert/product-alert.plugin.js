@@ -10,18 +10,6 @@ import HttpClient from 'src/service/http-client.service';
 import ButtonLoadingIndicator from 'src/utility/loading-indicator/button-loading-indicator.util';
 
 export default class ProductAlert extends Plugin {
-    static options = {
-        /**
-         * @type int
-         */
-        productId: 0,
-
-        /**
-         * @type string
-         */
-        productName: ''
-    };
-
     init() {
         this._getForm();
         this._getSubmitButton();
@@ -61,6 +49,9 @@ export default class ProductAlert extends Plugin {
         return true;
     }
 
+    /**
+     * @private
+     */
     _registerEvents() {
         this.el.addEventListener('submit', this._formSubmit.bind(this));
     }
@@ -89,12 +80,19 @@ export default class ProductAlert extends Plugin {
         this._client.post(requestUrl, formData, this._responseCallback.bind(this));
     }
 
+    /**
+     * @param response
+     * @private
+     */
     _responseCallback(response) {
         console.log(response);
 
         this._stopLoader();
     }
 
+    /**
+     * @private
+     */
     _displayLoader() {
         if (!this._loader) {
             this._loader = new ButtonLoadingIndicator(this._submitButton, 'beforeend');
@@ -103,6 +101,9 @@ export default class ProductAlert extends Plugin {
         this._loader.create();
     }
 
+    /**
+     * @private
+     */
     _stopLoader() {
         this._loader.remove();
     }

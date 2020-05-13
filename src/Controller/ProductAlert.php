@@ -6,9 +6,11 @@
 
 namespace ProductAlert\Controller;
 
+use ProductAlert\SalesChannel\ProductAlertService;
 use Shopware\Core\Checkout\Customer\SalesChannel\AddressService;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
+use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,18 +22,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductAlert extends AbstractController
 {
     /**
-     * @var AddressService
+     * @var ProductAlertService
      */
-    private $addressService;
+    private $productAlertService;
 
     /**
      * ProductAlert constructor.
      *
-     * @param AddressService $addressService
+     * @param ProductAlertService $productAlertService
      */
-    public function __construct(AddressService $addressService)
+    public function __construct(ProductAlertService $productAlertService)
     {
-        $this->addressService = $addressService;
+        $this->productAlertService = $productAlertService;
     }
 
     /**
@@ -39,15 +41,15 @@ class ProductAlert extends AbstractController
      *     methods={"POST"})
      * @RouteScope(scopes={"sales-channel-api"})
      *
-     * @param Request $request
+     * @param RequestDataBag $request
      * @param Context $context
      *
      * @return JsonResponse
      */
-    public function signIn(Request $request, Context $context): JsonResponse
+    public function signIn(RequestDataBag $request, Context $context): JsonResponse
     {
-        $email = $request->get('email');
+        $this->productAlertService->insert($request, $context);
 
-        return new JsonResponse($email);
+        return new JsonResponse(true);
     }
 }

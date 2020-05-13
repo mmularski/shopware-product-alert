@@ -9,12 +9,6 @@
         {% set product = page.product %}
 
         {% if product.stock >= 0 %}
-
-            {% set productAlertOptions = {
-                productId: product.id,
-                productName: product.name
-            } %}
-
             <br>
             <div class="product-detail-product-alert">
                 <div class="product-detail-ordernumber-container">
@@ -29,11 +23,11 @@
                       action="{% block page_product_detail_product_alert_form_action %}{{ path('sales-channel-api.action.product.alert.sign', {'version': 1}) }}{% endblock %}"
                       method="post"
                       class="buy-widget"
-                      data-product-alert="true"
-                      data-product-alert-options="{{ productAlertOptions|json_encode }}">
+                      data-product-alert="true">
 
                     <div class="form-row">
                         <div class="col-8">
+                            <input type="hidden" name="productId" value="{{ product.id }}">
                             <input type="email"
                                    class="form-control{% if formViolations.getViolations('/email') is not empty %} is-invalid{% endif %}"
                                    autocomplete="section-personal email"

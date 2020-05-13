@@ -6,60 +6,67 @@
  * @license See LICENSE_DIVANTE.txt for license details.
  */
 
+namespace ProductAlert\SalesChannel;
+
+use ProductAlert\SalesChannel\Validation\ProductAlertValidator;
+use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\Validation\DataBag\DataBag;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 /**
  * Class ProductAlertService
  */
 class ProductAlertService
 {
     /**
-     * @throws AddressNotFoundException
-     * @throws CustomerNotLoggedInException
-     * @throws InvalidUuidException
-     * @throws ConstraintViolationException
+     * @var EntityRepositoryInterface
      */
-    public function upsert(DataBag $data, SalesChannelContext $context): string
+    private $entityRepository;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var ProductAlertValidator
+     */
+    private $validator;
+
+    /**
+     * ProductAlertService constructor.
+     *
+     * @param EntityRepositoryInterface $entityRepository
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param ProductAlertValidator $validator
+     */
+    public function __construct(
+        EntityRepositoryInterface $entityRepository,
+        EventDispatcherInterface $eventDispatcher,
+        ProductAlertValidator $validator
+    ) {
+        $this->entityRepository = $entityRepository;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->validator = $validator;
+    }
+
+    /**
+     * @param DataBag $data
+     * @param Context $context
+     *
+     * @return void
+     */
+    public function insert(DataBag $data, Context $context): void
     {
-        $this->validateCustomerIsLoggedIn($context);
+        $this->validator->validate($data, $context);
 
-        if ($id = $data->get('id')) {
-            $this->validateAddressId((string) $id, $context);
-            $isCreate = false;
-        } else {
-            $id = Uuid::randomHex();
-            $isCreate = true;
-        }
-
-        $accountType = $data->get('accountType', CustomerEntity::ACCOUNT_TYPE_PRIVATE);
-        $definition = $this->getValidationDefinition($accountType, $isCreate, $context);
-        $this->validator->validate(array_merge(['id' => $id], $data->all()), $definition);
-
-        $addressData = [
-            'salutationId' => $data->get('salutationId'),
-            'firstName' => $data->get('firstName'),
-            'lastName' => $data->get('lastName'),
-            'street' => $data->get('street'),
-            'city' => $data->get('city'),
-            'zipcode' => $data->get('zipcode'),
-            'countryId' => $data->get('countryId'),
-            'countryStateId' => $data->get('countryStateId') ? $data->get('countryStateId') : null,
-            'company' => $data->get('company'),
-            'department' => $data->get('department'),
-            'title' => $data->get('title'),
-            'vatId' => $data->get('vatId'),
-            'phoneNumber' => $data->get('phoneNumber'),
-            'additionalAddressLine1' => $data->get('additionalAddressLine1'),
-            'additionalAddressLine2' => $data->get('additionalAddressLine2'),
+        $entryData = [
+            'email' => $data->get('email'),
+            'productId' => $data->get('productId'),
+            'salesChannelId' => $context->getSource()->getSalesChannelId(),
         ];
 
-        $mappingEvent = new DataMappingEvent($data, $addressData, $context->getContext());
-        $this->eventDispatcher->dispatch($mappingEvent, CustomerEvents::MAPPING_ADDRESS_CREATE);
-
-        $addressData = $mappingEvent->getOutput();
-        $addressData['id'] = $id;
-        $addressData['customerId'] = $context->getCustomer()->getId();
-
-        $this->customerAddressRepository->upsert([$addressData], $context->getContext());
-
-        return $id;
+        $this->entityRepository->upsert([$entryData], $context);
     }
 }

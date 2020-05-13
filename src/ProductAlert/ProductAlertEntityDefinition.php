@@ -27,6 +27,18 @@ class ProductAlertEntityDefinition extends EntityDefinition
     /** @var string */
     public const ENTITY_NAME = 'product_alert';
 
+    /** @var string */
+    public const FIELD_ID = 'id';
+
+    /** @var string */
+    public const FIELD_EMAIL = 'email';
+
+    /** @var string */
+    public const FIELD_PRODUCT_ID = 'productId';
+
+    /** @var string */
+    public const FIELD_SALES_CHANNEL_ID = 'salesChannelId';
+
     /**
      * @return string
      */

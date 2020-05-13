@@ -1,5 +1,4 @@
-<?xml version="1.0" ?>
-<!--
+<?xml version="1.0" ?><!--
 /**
  * @package  ProductAlert\Controller
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
@@ -8,17 +7,25 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+    <imports>
+        <import resource="snippets.xml" />
+    </imports>
     <services>
-
-        <!-- Snippet definition -->
-        <service id="ProductAlert\Resources\snippet\en_GB\SnippetFile_en_GB" public="true">
-            <tag name="shopware.snippet.file"/>
-        </service>
-
         <!-- Entity definition -->
         <service id="ProductAlert\ProductAlert\ProductAlertEntityDefinition">
             <tag name="shopware.entity.definition" entity="product_alert" />
+        </service>
+        <service id="ProductAlert\Controller\ProductAlert" public="true">
+            <argument id="ProductAlert\SalesChannel\ProductAlertService" type="service" />
+        </service>
+        <service id="ProductAlert\SalesChannel\Validation\ProductAlertValidator" public="true">
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />
+            <argument type="service" id="product_alert.repository" />
+        </service>
+        <service id="ProductAlert\SalesChannel\ProductAlertService" public="true">
+            <argument type="service" id="product_alert.repository" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="ProductAlert\SalesChannel\Validation\ProductAlertValidator" />
         </service>
     </services>
 </container>
