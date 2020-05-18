@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\ProductAlert;
+namespace Mularski\ProductAlert\ProductAlert;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 

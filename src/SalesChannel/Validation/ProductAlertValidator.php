@@ -1,28 +1,23 @@
 <?php declare(strict_types=1);
 /**
- * @package  shopware_dev
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package Mularski\ProductAlert
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\SalesChannel\Validation;
+namespace Mularski\ProductAlert\SalesChannel\Validation;
 
-use ProductAlert\ProductAlert\ProductAlertEntityDefinition;
+use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
 use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Validation\EntityExists;
-use Shopware\Core\Framework\DataAbstractionLayer\Validation\EntityNotExists;
 use Shopware\Core\Framework\Validation\DataBag\DataBag;
 use Shopware\Core\Framework\Validation\DataValidationDefinition;
 use Shopware\Core\Framework\Validation\DataValidator;
 use Shopware\Core\System\SalesChannel\SalesChannelDefinition;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use function _HumbugBox58fd4d9e2a25\Sodium\add;
 
 /**
  * Class ProductAlertValidator

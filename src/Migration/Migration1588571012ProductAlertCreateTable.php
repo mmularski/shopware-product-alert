@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\Migration;
+namespace Mularski\ProductAlert\Migration;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
@@ -41,6 +41,7 @@ class Migration1588571012ProductAlertCreateTable extends MigrationStep
     `sales_channel_id` BINARY(16) NOT NULL,
     `created_at` DATETIME(3) NOT NULL,
     `updated_at` DATETIME(3) NULL,
+    `is_sent` BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (`id`),
     KEY `fk.product_alert.sales_channel_id` (`sales_channel_id`),
     KEY `fk.product_alert.product_id` (`product_id`,`product_version_id`),

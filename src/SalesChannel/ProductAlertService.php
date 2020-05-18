@@ -1,14 +1,12 @@
 <?php declare(strict_types=1);
 /**
- * @package  shopware_dev
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package Mularski\ProductAlert
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\SalesChannel;
+namespace Mularski\ProductAlert\SalesChannel;
 
-use ProductAlert\SalesChannel\Validation\ProductAlertValidator;
+use Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\Validation\DataBag\DataBag;

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?><!--
+/**
+ * @package  ProductAlert\Controller
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ */
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Mularski\ProductAlert\ScheduledTask\AlertSender">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service id="Mularski\ProductAlert\ScheduledTask\AlertSenderHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service" id="product_alert.repository" />
+            <argument type="service" id="product.repository" />
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextFactory"/>
+            <tag name="messenger.message_handler" />
+        </service>
+    </services>
+</container>

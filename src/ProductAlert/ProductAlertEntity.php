@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\ProductAlert;
+namespace Mularski\ProductAlert\ProductAlert;
 
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -31,6 +30,11 @@ class ProductAlertEntity extends Entity
      * @var int
      */
     private $salesChannelId;
+
+    /**
+     * @var bool
+     */
+    private $isSent;
 
     /**
      * @return string
@@ -84,5 +88,21 @@ class ProductAlertEntity extends Entity
     public function setSalesChannelId(int $salesChannelId): void
     {
         $this->salesChannelId = $salesChannelId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSent(): bool
+    {
+        return $this->isSent;
+    }
+
+    /**
+     * @param bool $isSent
+     */
+    public function setIsSent(bool $isSent): void
+    {
+        $this->isSent = $isSent;
     }
 }

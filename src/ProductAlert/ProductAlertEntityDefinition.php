@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\ProductAlert;
+namespace Mularski\ProductAlert\ProductAlert;
 
 use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
@@ -38,6 +38,9 @@ class ProductAlertEntityDefinition extends EntityDefinition
 
     /** @var string */
     public const FIELD_SALES_CHANNEL_ID = 'salesChannelId';
+
+    /** @var string */
+    public const FIELD_IS_SENT = 'isSent';
 
     /**
      * @return string
@@ -86,6 +89,7 @@ class ProductAlertEntityDefinition extends EntityDefinition
                     false
                 ),
                 new ManyToOneAssociationField('product', 'product_id', ProductDefinition::class, 'id', false),
+                (new BoolField('is_sent', 'isSent')),
             ]
         );
     }

@@ -1,18 +1,24 @@
 {
-  "name": "divante-ltd/plugin-product-alert",
-  "description": "Skeleton plugin",
+  "name": "mularski/plugin-product-alert",
+  "description": "Product alert plugin with out of stock notification feature",
   "type": "shopware-platform-plugin",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "ProductAlert\\": "src/"
+      "Mularski\\ProductAlert\\": "src/"
     }
   },
+  "authors": [
+    {
+      "name": "Marek Mularczyk",
+      "email": "mmularczyk9@gmail.com"
+    }
+  ],
   "extra": {
-    "shopware-plugin-class": "ProductAlert\\ProductAlert",
+    "shopware-plugin-class": "Mularski\\ProductAlert\\ProductAlert",
     "label": {
-      "de-DE": "Skeleton plugin",
-      "en-GB": "Skeleton plugin"
+      "de-DE": "Out of stock notification",
+      "en-GB": "Out of stock notification"
     }
   }
 }

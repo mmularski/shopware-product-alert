@@ -5,7 +5,7 @@
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\Resources\snippet\en_GB;
+namespace Mularski\ProductAlert\Resources\snippet\en_GB;
 
 use Shopware\Core\System\Snippet\Files\SnippetFileInterface;
 

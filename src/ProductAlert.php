@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert;
+namespace Mularski\ProductAlert;
 
 use Shopware\Core\Framework\Plugin;
 

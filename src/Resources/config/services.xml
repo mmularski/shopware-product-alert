@@ -9,23 +9,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="snippets.xml" />
+        <import resource="crontab.xml" />
     </imports>
     <services>
         <!-- Entity definition -->
-        <service id="ProductAlert\ProductAlert\ProductAlertEntityDefinition">
+        <service id="Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition">
             <tag name="shopware.entity.definition" entity="product_alert" />
         </service>
-        <service id="ProductAlert\Controller\ProductAlert" public="true">
-            <argument id="ProductAlert\SalesChannel\ProductAlertService" type="service" />
+        <service id="Mularski\ProductAlert\Controller\ProductAlert" public="true">
+            <argument id="Mularski\ProductAlert\SalesChannel\ProductAlertService" type="service" />
         </service>
-        <service id="ProductAlert\SalesChannel\Validation\ProductAlertValidator" public="true">
+        <service id="Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator" public="true">
             <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />
             <argument type="service" id="product_alert.repository" />
         </service>
-        <service id="ProductAlert\SalesChannel\ProductAlertService" public="true">
+        <service id="Mularski\ProductAlert\SalesChannel\ProductAlertService" public="true">
             <argument type="service" id="product_alert.repository" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="ProductAlert\SalesChannel\Validation\ProductAlertValidator" />
+            <argument type="service" id="Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator" />
         </service>
     </services>
 </container>

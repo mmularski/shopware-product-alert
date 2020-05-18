@@ -1,19 +1,17 @@
 <?php declare(strict_types=1);
 /**
- * @package  ProductAlert\Controller
+ * @package Mularski\ProductAlert
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace ProductAlert\Controller;
+namespace Mularski\ProductAlert\Controller;
 
-use ProductAlert\SalesChannel\ProductAlertService;
-use Shopware\Core\Checkout\Customer\SalesChannel\AddressService;
+use Mularski\ProductAlert\SalesChannel\ProductAlertService;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
