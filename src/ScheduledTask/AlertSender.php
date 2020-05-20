@@ -26,6 +26,6 @@ class AlertSender extends ScheduledTask
      */
     public static function getDefaultInterval(): int
     {
-        return 1;//86400;
+        return 5;//86400;
     }
 }

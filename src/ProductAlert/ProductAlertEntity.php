@@ -6,8 +6,10 @@
 
 namespace Mularski\ProductAlert\ProductAlert;
 
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
+use Shopware\Core\System\SalesChannel\SalesChannelEntity;
 
 /**
  * Class ProductAlertEntity
@@ -19,22 +21,32 @@ class ProductAlertEntity extends Entity
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var int
      */
-    private $productId;
+    protected $productId;
 
     /**
      * @var int
      */
-    private $salesChannelId;
+    protected $salesChannelId;
 
     /**
      * @var bool
      */
-    private $isSent;
+    protected $isSent;
+
+    /**
+     * @var ProductEntity
+     */
+    protected $product;
+
+    /**
+     * @var SalesChannelEntity
+     */
+    protected $salesChannel;
 
     /**
      * @return string
@@ -104,5 +116,21 @@ class ProductAlertEntity extends Entity
     public function setIsSent(bool $isSent): void
     {
         $this->isSent = $isSent;
+    }
+
+    /**
+     * @return ProductEntity
+     */
+    public function getProduct(): ?ProductEntity
+    {
+        return $this->product;
+    }
+
+    /**
+     * @return SalesChannelEntity
+     */
+    public function getSalesChannel(): ?SalesChannelEntity
+    {
+        return $this->salesChannel;
     }
 }

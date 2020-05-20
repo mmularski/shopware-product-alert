@@ -12,7 +12,6 @@
         <import resource="crontab.xml" />
     </imports>
     <services>
-        <!-- Entity definition -->
         <service id="Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition">
             <tag name="shopware.entity.definition" entity="product_alert" />
         </service>
@@ -27,6 +26,10 @@
             <argument type="service" id="product_alert.repository" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator" />
+        </service>
+        <service id="Mularski\ProductAlert\MailTemplate\Service\MailSender" public="true">
+            <argument type="service" id="Shopware\Core\Content\MailTemplate\Service\MailService" />
+            <argument type="service" id="mail_template.repository" />
         </service>
     </services>
 </container>
