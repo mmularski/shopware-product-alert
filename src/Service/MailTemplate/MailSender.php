@@ -6,7 +6,7 @@
  * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\MailTemplate\Service;
+namespace Mularski\ProductAlert\Service\MailTemplate;
 
 use Mularski\ProductAlert\ProductAlert\ProductAlertEntity;
 use Shopware\Core\Content\MailTemplate\MailTemplateEntity;

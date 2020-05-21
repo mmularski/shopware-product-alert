@@ -4,7 +4,7 @@
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace Mularski\ProductAlert\SalesChannel\Validation;
+namespace Mularski\ProductAlert\Service\SalesChannel\Validation;
 
 use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
 use Shopware\Core\Content\Product\ProductDefinition;

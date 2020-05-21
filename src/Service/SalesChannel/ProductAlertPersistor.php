@@ -4,18 +4,18 @@
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-namespace Mularski\ProductAlert\SalesChannel;
+namespace Mularski\ProductAlert\Service\SalesChannel;
 
-use Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator;
+use Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\Validation\DataBag\DataBag;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class ProductAlertService
+ * Class ProductAlertPersistor
  */
-class ProductAlertService
+class ProductAlertPersistor
 {
     /**
      * @var EntityRepositoryInterface

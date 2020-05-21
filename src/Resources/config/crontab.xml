@@ -14,8 +14,7 @@
 
         <service id="Mularski\ProductAlert\ScheduledTask\AlertSenderHandler">
             <argument type="service" id="scheduled_task.repository" />
-            <argument type="service" id="product_alert.repository" />
-            <argument type="service" id="Mularski\ProductAlert\MailTemplate\Service\MailSender" />
+            <argument type="service" id="Mularski\ProductAlert\Service\ProductAlertService" />
             <tag name="messenger.message_handler" />
         </service>
     </services>

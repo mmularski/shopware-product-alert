@@ -6,7 +6,7 @@
 
 namespace Mularski\ProductAlert\Controller;
 
-use Mularski\ProductAlert\SalesChannel\ProductAlertService;
+use Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
@@ -20,16 +20,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductAlert extends AbstractController
 {
     /**
-     * @var ProductAlertService
+     * @var ProductAlertPersistor
      */
     private $productAlertService;
 
     /**
      * ProductAlert constructor.
      *
-     * @param ProductAlertService $productAlertService
+     * @param ProductAlertPersistor $productAlertService
      */
-    public function __construct(ProductAlertService $productAlertService)
+    public function __construct(ProductAlertPersistor $productAlertService)
     {
         $this->productAlertService = $productAlertService;
     }

@@ -10,26 +10,31 @@
     <imports>
         <import resource="snippets.xml" />
         <import resource="crontab.xml" />
+        <import resource="commands.xml" />
     </imports>
     <services>
         <service id="Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition">
             <tag name="shopware.entity.definition" entity="product_alert" />
         </service>
-        <service id="Mularski\ProductAlert\Controller\ProductAlert" public="true">
-            <argument id="Mularski\ProductAlert\SalesChannel\ProductAlertService" type="service" />
+        <service id="Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor" public="true">
+            <argument type="service" id="product_alert.repository" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" />
         </service>
-        <service id="Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator" public="true">
+        <service id="Mularski\ProductAlert\Controller\ProductAlert" public="true">
+            <argument id="Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor" type="service" />
+        </service>
+        <service id="Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" public="true">
             <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />
             <argument type="service" id="product_alert.repository" />
         </service>
-        <service id="Mularski\ProductAlert\SalesChannel\ProductAlertService" public="true">
-            <argument type="service" id="product_alert.repository" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="Mularski\ProductAlert\SalesChannel\Validation\ProductAlertValidator" />
-        </service>
-        <service id="Mularski\ProductAlert\MailTemplate\Service\MailSender" public="true">
+        <service id="Mularski\ProductAlert\Service\MailTemplate\MailSender" public="true">
             <argument type="service" id="Shopware\Core\Content\MailTemplate\Service\MailService" />
             <argument type="service" id="mail_template.repository" />
+        </service>
+        <service id="Mularski\ProductAlert\Service\ProductAlertService" public="true">
+            <argument type="service" id="Mularski\ProductAlert\Service\MailTemplate\MailSender" />
+            <argument type="service" id="product_alert.repository" />
         </service>
     </services>
 </container>

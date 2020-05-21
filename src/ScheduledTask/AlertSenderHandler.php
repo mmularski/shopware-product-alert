@@ -6,14 +6,8 @@
 
 namespace Mularski\ProductAlert\ScheduledTask;
 
-use Mularski\ProductAlert\MailTemplate\Service\MailSender;
-use Mularski\ProductAlert\ProductAlert\ProductAlertEntity;
-use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
-use Shopware\Core\Content\Product\ProductDefinition;
-use Shopware\Core\Framework\Context;
+use Mularski\ProductAlert\Service\ProductAlertService;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\MessageQueue\ScheduledTask\ScheduledTaskHandler;
 
 /**
@@ -22,31 +16,23 @@ use Shopware\Core\Framework\MessageQueue\ScheduledTask\ScheduledTaskHandler;
 class AlertSenderHandler extends ScheduledTaskHandler
 {
     /**
-     * @var EntityRepositoryInterface
+     * @var ProductAlertService
      */
-    private $productAlertRepository;
-
-    /**
-     * @var MailSender
-     */
-    private $mailSender;
+    private $productAlertService;
 
     /**
      * AlertSenderHandler constructor.
      *
      * @param EntityRepositoryInterface $scheduledTaskRepository
-     * @param EntityRepositoryInterface $productAlertRepository
-     * @param MailSender $mailSender
+     * @param ProductAlertService $productAlertService
      */
     public function __construct(
         EntityRepositoryInterface $scheduledTaskRepository,
-        EntityRepositoryInterface $productAlertRepository,
-        MailSender $mailSender
+        ProductAlertService $productAlertService
     ) {
         parent::__construct($scheduledTaskRepository);
 
-        $this->productAlertRepository = $productAlertRepository;
-        $this->mailSender = $mailSender;
+        $this->productAlertService = $productAlertService;
     }
 
     /**
@@ -62,23 +48,7 @@ class AlertSenderHandler extends ScheduledTaskHandler
      */
     public function run(): void
     {
-        $criteria = new Criteria();
-        $criteria->addFilter(new EqualsFilter(ProductAlertEntityDefinition::FIELD_IS_SENT, 0))
-            ->addAssociation('salesChannel')
-            ->addAssociation(ProductDefinition::ENTITY_NAME);
-
-        $rowsToHandle = $this->productAlertRepository
-            ->search($criteria, Context::createDefaultContext())
-            ->getElements();
-
-        /** @var ProductAlertEntity $row */
-        foreach ($rowsToHandle as $row) {
-            if ($row->getProduct()->getAvailableStock() > 0) {
-                continue;
-            }
-
-            $this->mailSender->sendProductAlertMail($row, Context::createDefaultContext());
-        }
+        $this->productAlertService->process();
 
         return;
     }
