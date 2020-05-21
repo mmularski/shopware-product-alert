@@ -50,9 +50,11 @@ class ProductAlertValidator
      * @param DataBag $data
      * @param Context $context
      *
+     * @return void
+     *
      * @throws \Exception
      */
-    public function validate(DataBag $data, Context $context)
+    public function validate(DataBag $data, Context $context): void
     {
         $salesChannelId = $context->getSource()->getSalesChannelId();
         $definition = $this->getDefinition($data, $context);
@@ -68,7 +70,7 @@ class ProductAlertValidator
      *
      * @return DataValidationDefinition
      */
-    private function getDefinition(DataBag $data, Context $context)
+    private function getDefinition(DataBag $data, Context $context): DataValidationDefinition
     {
         $definition = new DataValidationDefinition('product_alert.create');
 
@@ -104,7 +106,7 @@ class ProductAlertValidator
      *
      * @throws \Exception
      */
-    private function validateIsExist(DataBag $data, Context $context)
+    private function validateIsExist(DataBag $data, Context $context): void
     {
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter(ProductAlertEntityDefinition::FIELD_EMAIL, $data->get('email')))

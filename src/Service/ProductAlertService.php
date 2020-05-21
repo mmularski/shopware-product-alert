@@ -1,10 +1,7 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  shopware_dev
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package Mularski\ProductAlert
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
 namespace Mularski\ProductAlert\Service;
@@ -50,7 +47,7 @@ class ProductAlertService
     /**
      * @return void
      */
-    public function process()
+    public function process(): void
     {
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter(ProductAlertEntityDefinition::FIELD_IS_SENT, 0))

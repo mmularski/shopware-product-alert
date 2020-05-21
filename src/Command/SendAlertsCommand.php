@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 /**
- * @package  shopware_dev
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package Mularski\ProductAlert
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
+namespace Mularski\ProductAlert\Command;
+
+use Mularski\ProductAlert\Service\ProductAlertService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,6 +22,24 @@ class SendAlertsCommand extends Command
     protected static $defaultName = 'product:alert:send';
 
     /**
+     * @var ProductAlertService
+     */
+    private $productAlertService;
+
+    /**
+     * SendAlertsCommand constructor.
+     *
+     * @param ProductAlertService $productAlertService
+     * @param null $name
+     */
+    public function __construct(ProductAlertService $productAlertService)
+    {
+        parent::__construct();
+
+        $this->productAlertService = $productAlertService;
+    }
+
+    /**
      * @param InputInterface $input
      * @param OutputInterface $output
      *
@@ -28,6 +47,8 @@ class SendAlertsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Foo');
+        $this->productAlertService->process();
+
+        $output->writeln('<info>Success!</info>');
     }
 }
