@@ -66,7 +66,15 @@ class ProductAlertService
 
             $this->mailSender->sendProductAlertMail($row, Context::createDefaultContext());
 
-            // @ToDo change isSend to 1
+            $this->productAlertRepository->update(
+                [
+                    [
+                        ProductAlertEntityDefinition::FIELD_ID => $row->getId(),
+                        ProductAlertEntityDefinition::FIELD_IS_SENT => true,
+                    ],
+                ],
+                Context::createDefaultContext()
+            );
         }
 
         return;

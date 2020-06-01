@@ -23,6 +23,7 @@
         </service>
         <service id="Mularski\ProductAlert\Controller\ProductAlert" public="true">
             <argument id="Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor" type="service" />
+            <argument type="service" id="logger"/>
         </service>
         <service id="Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" public="true">
             <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />

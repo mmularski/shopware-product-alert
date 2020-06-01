@@ -7,6 +7,8 @@
 namespace Mularski\ProductAlert\Controller;
 
 use Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor;
+use Mularski\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
+use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
@@ -25,13 +27,20 @@ class ProductAlert extends AbstractController
     private $productAlertService;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * ProductAlert constructor.
      *
      * @param ProductAlertPersistor $productAlertService
+     * @param LoggerInterface $logger
      */
-    public function __construct(ProductAlertPersistor $productAlertService)
+    public function __construct(ProductAlertPersistor $productAlertService, LoggerInterface $logger)
     {
         $this->productAlertService = $productAlertService;
+        $this->logger = $logger;
     }
 
     /**
@@ -46,8 +55,24 @@ class ProductAlert extends AbstractController
      */
     public function signIn(RequestDataBag $request, Context $context): JsonResponse
     {
-        $this->productAlertService->insert($request, $context);
+        $response = [
+            'error' => false,
+            'message' => 'Successfully signed to product stock notification!',
+        ];
 
-        return new JsonResponse(true);
+        try {
+            $this->productAlertService->insert($request, $context);
+        } catch (AlreadySignedException $ex) {
+            $response['error'] = true;
+            $response['message'] = $ex->getMessage();
+
+        } catch (\Exception $ex) {
+            $this->logger->warning($ex->getMessage(), $ex->getTrace());
+
+            $response['error'] = true;
+            $response['message'] = 'Something went wrong during product alert signing';
+        }
+
+        return new JsonResponse($response);
     }
 }

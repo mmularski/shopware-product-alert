@@ -26,7 +26,6 @@ class AlertSender extends ScheduledTask
      */
     public static function getDefaultInterval(): int
     {
-        //@ToDO Change to 86400
-        return 5;//86400;
+        return 86400;
     }
 }

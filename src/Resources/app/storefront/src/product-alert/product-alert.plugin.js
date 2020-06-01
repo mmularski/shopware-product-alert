@@ -6,7 +6,7 @@
 import Plugin from 'src/plugin-system/plugin.class';
 import DomAccess from 'src/helper/dom-access.helper';
 import FormSerializeUtil from 'src/utility/form/form-serialize.util';
-import HttpClient from 'src/service/http-client.service';
+import StoreApiClient from 'src/service/store-api-client.service';
 import ButtonLoadingIndicator from 'src/utility/loading-indicator/button-loading-indicator.util';
 
 export default class ProductAlert extends Plugin {
@@ -18,7 +18,7 @@ export default class ProductAlert extends Plugin {
             throw new Error(`No form found for the plugin: ${this.constructor.name}`);
         }
 
-        this._client = new HttpClient(window.accessKey, window.contextToken);
+        this._client = new StoreApiClient();
 
         this._registerEvents();
     }
@@ -81,11 +81,16 @@ export default class ProductAlert extends Plugin {
     }
 
     /**
-     * @param response
      * @private
      */
     _responseCallback(response) {
-        console.log(response);
+        response = JSON.parse(response);
+
+        if (response.error) {
+            this._alert('warning', response.message);
+        } else {
+            this._alert('success', response.message);
+        }
 
         this._stopLoader();
     }
@@ -106,5 +111,13 @@ export default class ProductAlert extends Plugin {
      */
     _stopLoader() {
         this._loader.remove();
+    }
+
+    _alert(type, message) {
+        const alert = DomAccess.querySelector(this._form, '#product-alert-alert');
+
+        alert.innerHTML = '<div role="alert" class="alert alert-' + type + '"><div class="alert-content-container">' +
+            '<div class="alert-content">' + message + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '</div></div></div>';
     }
 }

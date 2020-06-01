@@ -6,6 +6,7 @@
 
 namespace Mularski\ProductAlert\Service\SalesChannel\Validation;
 
+use Mularski\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
 use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
 use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\Context;
@@ -121,7 +122,7 @@ class ProductAlertValidator
         $result = $this->entityRepository->search($criteria, $context);
 
         if ($result->count() > 0) {
-            throw new \Exception(sprintf('You are already signed to this product.'), 400);
+            throw new AlreadySignedException(sprintf('You are already signed to this product.'), 400);
         }
     }
 }

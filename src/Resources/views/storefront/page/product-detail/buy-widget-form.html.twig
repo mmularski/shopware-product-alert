@@ -8,8 +8,7 @@
         {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
         {% set product = page.product %}
 
-        {# @ToDo statement #}
-        {% if product.stock >= 0 %}
+        {% if product.stock <= 0 %}
             <br>
             <div class="product-detail-product-alert">
                 <div class="product-detail-ordernumber-container">
@@ -26,6 +25,7 @@
                       class="buy-widget"
                       data-product-alert="true">
 
+                    <div id="product-alert-alert" class="hidden"></div>
                     <div class="form-row">
                         <div class="col-8">
                             <input type="hidden" name="productId" value="{{ product.id }}">
