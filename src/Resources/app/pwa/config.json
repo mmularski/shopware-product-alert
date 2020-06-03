@@ -1,0 +1,9 @@
+{
+  "slots": [
+    {
+      "name": "product-page-add-to-cart-button-after",
+      "file": "ProductAlert.vue"
+    }
+  ],
+  "settings": {}
+}
