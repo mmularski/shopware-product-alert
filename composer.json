@@ -8,6 +8,11 @@
       "Mularski\\ProductAlert\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Mularski\\ProductAlert\\Test\\": "tests/"
+    }
+  },
   "authors": [
     {
       "name": "Marek Mularczyk",

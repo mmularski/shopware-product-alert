@@ -62,7 +62,7 @@ class ProductAlertPersistor
         $entryData = [
             'email' => $data->get('email'),
             'productId' => $data->get('productId'),
-            'salesChannelId' => $context->getSource()->getSalesChannelId(),
+            'salesChannelId' => $data->get('salesChannelId') ?? $context->getSource()->getSalesChannelId(),
         ];
 
         $this->entityRepository->upsert([$entryData], $context);
