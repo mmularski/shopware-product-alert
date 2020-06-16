@@ -10,7 +10,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Mularski\\ProductAlert\\": "tests/"
+      "Mularski\\ProductAlert\\Test\\": "tests/"
     }
   },
   "authors": [

@@ -57,11 +57,15 @@ class ProductAlertValidator
      */
     public function validate(DataBag $data, Context $context): void
     {
-        $salesChannelId = $context->getSource()->getSalesChannelId();
+        if (!$data->get(ProductAlertEntityDefinition::FIELD_SALES_CHANNEL_ID)) {
+            $salesChannelId = $context->getSource()->getSalesChannelId();
+
+            $data->add([ProductAlertEntityDefinition::FIELD_SALES_CHANNEL_ID => $salesChannelId]);
+        }
+
         $definition = $this->getDefinition($data, $context);
 
-        $this->validator->validate(array_merge($data->all(), ['salesChannelId' => $salesChannelId]), $definition);
-
+        $this->validator->validate($data->all(), $definition);
         $this->validateIsExist($data, $context);
     }
 
@@ -115,7 +119,7 @@ class ProductAlertValidator
             ->addFilter(
                 new EqualsFilter(
                     ProductAlertEntityDefinition::FIELD_SALES_CHANNEL_ID,
-                    $context->getSource()->getSalesChannelId()
+                    $data->get(ProductAlertEntityDefinition::FIELD_SALES_CHANNEL_ID)
                 )
             );
 

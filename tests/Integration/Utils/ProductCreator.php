@@ -1,10 +1,7 @@
 <?php declare(strict_types=1);
-
 /**
- * @package  shopware_dev
- * @author Marek Mularczyk <mmularczyk@divante.pl>
- * @copyright 2020 Divante Sp. z o.o.
- * @license See LICENSE_DIVANTE.txt for license details.
+ * @package Mularski\ProductAlert
+ * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
 namespace Mularski\ProductAlert\Test\Integration\Utils;
@@ -42,7 +39,7 @@ class ProductCreator
     /**
      * @return string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function createProduct(): string
     {
@@ -76,7 +73,7 @@ class ProductCreator
             ],
         ];
 
-        $this->container->get('product.repository')->create($productData, Context::createDefaultContext());
+        $this->container->get('product.repository')->create([$productData], Context::createDefaultContext());
 
         return $productData['id'];
     }
