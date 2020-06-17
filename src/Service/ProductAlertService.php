@@ -60,7 +60,7 @@ class ProductAlertService
 
         /** @var ProductAlertEntity $row */
         foreach ($rowsToHandle as $row) {
-            if ($row->getProduct()->getAvailableStock() > 0) {
+            if ($row->getProduct()->getAvailableStock() <= 0) {
                 continue;
             }
 

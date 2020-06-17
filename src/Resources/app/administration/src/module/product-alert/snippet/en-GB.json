@@ -1,0 +1,16 @@
+{
+  "product-alert": {
+    "list": {
+      "columnId": "Product ID",
+      "columnName": "Product Name",
+      "columnEmail": "Email"
+    },
+    "details": {
+      "defaultPlaceholder": "Fetching data...",
+      "idLabel": "Product ID",
+      "nameLabel": "Product Name",
+      "countLabel": "Number of subscribers for out of stock notification",
+      "countLabelPlaceholder": "Calculating..."
+    }
+  }
+}
