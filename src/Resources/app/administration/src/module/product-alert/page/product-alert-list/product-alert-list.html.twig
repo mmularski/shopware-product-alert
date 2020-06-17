@@ -1,0 +1,19 @@
+{% block product_alert_list %}
+    <sw-page class="product-alert-list">
+        <template slot="content">
+            {% block product_alert_list_content %}
+                <div class="sw-promotion-list__content">
+                    {% block product_alert_list_content_grid %}
+                        <sw-entity-listing
+                                v-if="rows"
+                                :items="rows"
+                                :repository="repository"
+                                :showSelection="false"
+                                :columns="columns">
+                        </sw-entity-listing>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

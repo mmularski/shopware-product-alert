@@ -1,0 +1,25 @@
+{% block product_alert_list %}
+    <sw-page class="swag-bundle-detail">
+        <template slot="content">
+            <sw-card-view>
+                <sw-card v-if="alertData">
+                    <sw-field :label="$t('product-alert.details.idLabel')"
+                              :placeholder="$tc('product-alert.details.defaultPlaceholder')"
+                              v-model="alertData.id"
+                              disabled
+                    ></sw-field>
+                    <sw-field :label="$t('product-alert.details.nameLabel')"
+                              :placeholder="$tc('product-alert.details.defaultPlaceholder')"
+                              v-model="alertData.name"
+                              disabled
+                    ></sw-field>
+                    <sw-field :label="$t('product-alert.details.countLabel')"
+                              :placeholder="$tc('product-alert.details.countLabelPlaceholder')"
+                              v-model="alertData.count"
+                              disabled
+                    ></sw-field>
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}
