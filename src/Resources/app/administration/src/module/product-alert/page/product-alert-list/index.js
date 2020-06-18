@@ -70,7 +70,6 @@ Component.register('product-alert-list', {
             this.repository = this.repositoryFactory.create('product_alert');
 
             const criteria = new Criteria();
-            criteria.addFilter(Criteria.equals('product_alert.isSent', false));
             criteria.addAssociation('product');
 
             this.repository
