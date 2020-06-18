@@ -70,12 +70,9 @@ class ProductAlertService
 
             $this->mailSender->sendProductAlertMail($row, Context::createDefaultContext());
 
-            $this->productAlertRepository->update(
+            $this->productAlertRepository->delete(
                 [
-                    [
-                        ProductAlertEntityDefinition::FIELD_ID => $row->getId(),
-                        ProductAlertEntityDefinition::FIELD_IS_SENT => true,
-                    ],
+                    [ProductAlertEntityDefinition::FIELD_ID => $row->getId()],
                 ],
                 Context::createDefaultContext()
             );
