@@ -1,7 +1,9 @@
 <?xml version="1.0" ?><!--
 /**
- * @package  ProductAlert\Controller
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 -->
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -13,31 +15,31 @@
         <import resource="commands.xml" />
     </imports>
     <services>
-        <service id="Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition">
+        <service id="Divante\ProductAlert\ProductAlert\ProductAlertEntityDefinition">
             <tag name="shopware.entity.definition" entity="product_alert" />
         </service>
-        <service id="Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor" public="true">
+        <service id="Divante\ProductAlert\Service\SalesChannel\ProductAlertPersistor" public="true">
             <argument type="service" id="product_alert.repository" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" />
+            <argument type="service" id="Divante\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" />
         </service>
-        <service id="Mularski\ProductAlert\Controller\ProductAlertController" public="true">
-            <argument id="Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor" type="service" />
+        <service id="Divante\ProductAlert\Controller\ProductAlertController" public="true">
+            <argument id="Divante\ProductAlert\Service\SalesChannel\ProductAlertPersistor" type="service" />
             <argument type="service" id="logger"/>
         </service>
-        <service id="Mularski\ProductAlert\Controller\ManualSendController" public="true">
-            <argument id="Mularski\ProductAlert\Service\ProductAlertService" type="service" />
+        <service id="Divante\ProductAlert\Controller\ManualSendController" public="true">
+            <argument id="Divante\ProductAlert\Service\ProductAlertService" type="service" />
         </service>
-        <service id="Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" public="true">
+        <service id="Divante\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator" public="true">
             <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator" />
             <argument type="service" id="product_alert.repository" />
         </service>
-        <service id="Mularski\ProductAlert\Service\MailTemplate\MailSender" public="true">
+        <service id="Divante\ProductAlert\Service\MailTemplate\MailSender" public="true">
             <argument type="service" id="Shopware\Core\Content\MailTemplate\Service\MailService" />
             <argument type="service" id="mail_template.repository" />
         </service>
-        <service id="Mularski\ProductAlert\Service\ProductAlertService" public="true">
-            <argument type="service" id="Mularski\ProductAlert\Service\MailTemplate\MailSender" />
+        <service id="Divante\ProductAlert\Service\ProductAlertService" public="true">
+            <argument type="service" id="Divante\ProductAlert\Service\MailTemplate\MailSender" />
             <argument type="service" id="product_alert.repository" />
         </service>
     </services>

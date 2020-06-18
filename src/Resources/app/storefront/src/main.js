@@ -1,6 +1,8 @@
 /**
- * @package  ProductAlert\Controller
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
 import ProductAlert from './product-alert/product-alert.plugin';

@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\Service\MailTemplate;
+namespace Divante\ProductAlert\Service\MailTemplate;
 
-use Mularski\ProductAlert\ProductAlert\ProductAlertEntity;
+use Divante\ProductAlert\ProductAlert\ProductAlertEntity;
 use Shopware\Core\Content\MailTemplate\MailTemplateEntity;
 use Shopware\Core\Content\MailTemplate\Service\MailService;
 use Shopware\Core\Framework\Context;

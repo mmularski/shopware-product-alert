@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-use Mularski\ProductAlert\Controller\ProductAlertController;
-use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
-use Mularski\ProductAlert\Test\Integration\Utils\ProductCreator;
+use Divante\ProductAlert\Controller\ProductAlertController;
+use Divante\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
+use Divante\ProductAlert\Test\Integration\Utils\ProductCreator;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;

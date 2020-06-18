@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\Command;
+namespace Divante\ProductAlert\Command;
 
-use Mularski\ProductAlert\Service\ProductAlertService;
+use Divante\ProductAlert\Service\ProductAlertService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
