@@ -43,7 +43,6 @@ Shopware.Component.register('product-alert-details', {
     methods: {
         getCriteria() {
             const criteria = new Criteria();
-            criteria.addFilter(Criteria.equals('product_alert.isSent', false));
             criteria.addAssociation('product');
 
             return criteria;
