@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\Controller;
+namespace Divante\ProductAlert\Controller;
 
-use Mularski\ProductAlert\Service\SalesChannel\ProductAlertPersistor;
-use Mularski\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
+use Divante\ProductAlert\Service\SalesChannel\ProductAlertPersistor;
+use Divante\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
 use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;

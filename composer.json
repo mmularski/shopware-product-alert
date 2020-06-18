@@ -1,29 +1,39 @@
 {
-  "name": "mularski/plugin-product-alert",
+  "name": "divante/product-alert",
   "description": "Product alert plugin with out of stock notification feature",
+  "version": "1.0.0",
   "type": "shopware-platform-plugin",
   "license": "MIT",
+  "keywords": ["divante", "out of stock notification", "notification", "product"],
+  "require": {
+    "shopware/core": "~6.2.0"
+  },
   "autoload": {
     "psr-4": {
-      "Mularski\\ProductAlert\\": "src/"
+      "Divante\\ProductAlert\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Mularski\\ProductAlert\\Test\\": "tests/"
+      "Divante\\ProductAlert\\Test\\": "tests/"
     }
   },
   "authors": [
+    {
+      "name": "Divante LTD"
+    },
     {
       "name": "Marek Mularczyk",
       "email": "mmularczyk9@gmail.com"
     }
   ],
   "extra": {
-    "shopware-plugin-class": "Mularski\\ProductAlert\\ProductAlert",
+    "shopware-plugin-class": "Divante\\ProductAlert\\DivanteProductAlert",
     "label": {
-      "de-DE": "Out of stock notification",
       "en-GB": "Out of stock notification"
+    },
+    "description": {
+      "en-GB": "Plugin allows customers to subscribe notification when product will back to stock."
     }
   }
 }

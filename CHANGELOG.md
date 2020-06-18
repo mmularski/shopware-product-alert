@@ -1,7 +1,7 @@
 CHANGELOG for Product Alert Module
 ===================
 
-### v1.0.0 - 2020-06-01
+### v1.0.0
 
 **Added**
 
@@ -11,4 +11,7 @@ CHANGELOG for Product Alert Module
 * Individual email template(customizable in admin)
 * Cron job which sends emails about products which are back to stock()
 * CLI command which allows to send a product alert emails manually
+* Grid in admin panel under Catalogues
+* Statistics how many subscribers are signed to specific product
+* Button above grid which allows to process notifications manually
 

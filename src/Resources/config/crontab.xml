@@ -1,20 +1,22 @@
 <?xml version="1.0" ?><!--
 /**
- * @package  ProductAlert\Controller
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 -->
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Mularski\ProductAlert\ScheduledTask\AlertSender">
+        <service id="Divante\ProductAlert\ScheduledTask\AlertSender">
             <tag name="shopware.scheduled.task" />
         </service>
 
-        <service id="Mularski\ProductAlert\ScheduledTask\AlertSenderHandler">
+        <service id="Divante\ProductAlert\ScheduledTask\AlertSenderHandler">
             <argument type="service" id="scheduled_task.repository" />
-            <argument type="service" id="Mularski\ProductAlert\Service\ProductAlertService" />
+            <argument type="service" id="Divante\ProductAlert\Service\ProductAlertService" />
             <tag name="messenger.message_handler" />
         </service>
     </services>

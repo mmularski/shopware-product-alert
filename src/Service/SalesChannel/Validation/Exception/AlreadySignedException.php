@@ -1,10 +1,12 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\Service\SalesChannel\Validation\Exception;
+namespace Divante\ProductAlert\Service\SalesChannel\Validation\Exception;
 
 /**
  * Class AlreadySignedException

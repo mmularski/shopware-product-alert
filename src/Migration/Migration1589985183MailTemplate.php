@@ -1,10 +1,12 @@
 <?php declare(strict_types=1);
 /**
- * @package Mularski\ProductAlert
- * @author Marek Mularczyk <mmularczyk9@gmail.com>
+ * @package Divante\ProductAlert
+ * @author Marek Mularczyk <mmularczyk@divante.pl>
+ * @copyright 2020 Divante Sp. z o.o.
+ * @license See LICENSE_DIVANTE.txt for license details.
  */
 
-namespace Mularski\ProductAlert\Migration;
+namespace Divante\ProductAlert\Migration;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
@@ -38,7 +40,6 @@ class Migration1589985183MailTemplate extends MigrationStep
         $mailTemplateTypeId = $this->createMailTemplateType($connection);
 
         $this->createMailTemplate($connection, $mailTemplateTypeId);
-        $this->registerEventAction($connection, $mailTemplateTypeId);
     }
 
     /**
@@ -129,7 +130,7 @@ SQL;
             [
                 'id' => Uuid::fromHexToBytes($mailTemplateId),
                 'mail_template_type_id' => Uuid::fromHexToBytes($mailTemplateTypeId),
-                'system_default' => true,
+                'system_default' => 0,
                 'created_at' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
             ]
         );
@@ -176,26 +177,6 @@ SQL;
 
             $connection->insert('mail_template_sales_channel', $mailTemplateSalesChannel);
         }
-    }
-
-    /**
-     * @param Connection $connection
-     * @param string $mailTemplateTypeId
-     *
-     * @throws DBALException
-     */
-    private function registerEventAction(Connection $connection, string $mailTemplateTypeId): void
-    {
-        $connection->insert(
-            'event_action',
-            [
-                'id' => Uuid::randomBytes(),
-                'event_name' => 'product.stock.alert.send',
-                'action_name' => MailTemplateActions::MAIL_TEMPLATE_MAIL_SEND_ACTION,
-                'config' => json_encode(['mail_template_type_id' => $mailTemplateTypeId]),
-                'created_at' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
-            ]
-        );
     }
 
     /**
