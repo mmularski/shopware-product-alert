@@ -1,12 +1,18 @@
 import template from './product-alert-list.html.twig';
 
+const {Component, Mixin} = Shopware;
 const {Criteria} = Shopware.Data;
 
-Shopware.Component.register('product-alert-list', {
+Component.register('product-alert-list', {
     template,
 
     inject: [
-        'repositoryFactory'
+        'repositoryFactory',
+        'productAlertApiService'
+    ],
+
+    mixins: [
+        Mixin.getByName('notification')
     ],
 
     metaInfo() {
@@ -18,22 +24,15 @@ Shopware.Component.register('product-alert-list', {
     data() {
         return {
             repository: null,
-            rows: null
+            rows: null,
+            processSuccess: false,
+            isLoading: false,
+            modalVisible: false,
         };
     },
 
     created() {
-        this.repository = this.repositoryFactory.create('product_alert');
-
-        const criteria = new Criteria();
-        criteria.addFilter(Criteria.equals('product_alert.isSent', false));
-        criteria.addAssociation('product');
-
-        this.repository
-            .search(criteria, Shopware.Context.api)
-            .then((result) => {
-                this.rows = result;
-            });
+        this.fetchData();
     },
 
     computed: {
@@ -64,5 +63,58 @@ Shopware.Component.register('product-alert-list', {
                 }
             ];
         }
+    },
+
+    methods: {
+        fetchData() {
+            this.repository = this.repositoryFactory.create('product_alert');
+
+            const criteria = new Criteria();
+            criteria.addFilter(Criteria.equals('product_alert.isSent', false));
+            criteria.addAssociation('product');
+
+            this.repository
+                .search(criteria, Shopware.Context.api)
+                .then((result) => {
+                    this.rows = result;
+                });
+        },
+        processAlerts() {
+            this.closeModal();
+            this.createNotificationInfo({
+                title: this.$tc('global.default.info'),
+                message: this.$tc('product-alert.process.started')
+            });
+
+            this.isLoading = true;
+
+            this.productAlertApiService.process().then((response) => {
+                this.fetchData();
+
+                this.createNotificationSuccess({
+                    title: this.$tc('global.default.success'),
+                    message: this.$tc('product-alert.process.success', 0, {count: response.data})
+                });
+            }).catch(() => {
+                this.createNotificationError({
+                    title: this.$tc('global.default.error'),
+                    message: this.$tc('product-alert.process.error')
+                });
+
+                this.processSuccess = false;
+            });
+
+            this.processSuccess = true;
+            this.isLoading = false;
+        },
+        processFinish() {
+            this.processSuccess = false;
+        },
+        showModal() {
+            this.modalVisible = true;
+        },
+        closeModal() {
+            this.modalVisible = false;
+        },
     }
 });

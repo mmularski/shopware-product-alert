@@ -47,8 +47,8 @@ class SendAlertsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->productAlertService->process();
+        $affected = $this->productAlertService->process();
 
-        $output->writeln('<info>Success!</info>');
+        $output->writeln("<info>{$affected} notifications has been successfully sent!</info>");
     }
 }

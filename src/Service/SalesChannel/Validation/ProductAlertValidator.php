@@ -53,7 +53,7 @@ class ProductAlertValidator
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws AlreadySignedException
      */
     public function validate(DataBag $data, Context $context): void
     {
@@ -109,7 +109,7 @@ class ProductAlertValidator
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws AlreadySignedException
      */
     private function validateIsExist(DataBag $data, Context $context): void
     {
