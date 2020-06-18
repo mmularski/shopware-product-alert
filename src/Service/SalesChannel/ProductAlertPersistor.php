@@ -6,6 +6,7 @@
 
 namespace Mularski\ProductAlert\Service\SalesChannel;
 
+use Mularski\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
 use Mularski\ProductAlert\Service\SalesChannel\Validation\ProductAlertValidator;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
@@ -54,6 +55,8 @@ class ProductAlertPersistor
      * @param Context $context
      *
      * @return void
+     *
+     * @throws AlreadySignedException
      */
     public function insert(DataBag $data, Context $context): void
     {

@@ -4,7 +4,7 @@
  * @author Marek Mularczyk <mmularczyk9@gmail.com>
  */
 
-use Mularski\ProductAlert\Controller\ProductAlert;
+use Mularski\ProductAlert\Controller\ProductAlertController;
 use Mularski\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
 use Mularski\ProductAlert\Test\Integration\Utils\ProductCreator;
 use PHPUnit\Framework\TestCase;
@@ -32,7 +32,7 @@ class ProductAlertTest extends TestCase
     protected $productAlertRepository;
 
     /**
-     * @var ProductAlert|object|null
+     * @var ProductAlertController|object|null
      */
     protected $controller;
 
@@ -59,7 +59,7 @@ class ProductAlertTest extends TestCase
         parent::setUp();
 
         $this->productAlertRepository = $this->getContainer()->get('product_alert.repository');
-        $this->controller = $this->getContainer()->get(ProductAlert::class);
+        $this->controller = $this->getContainer()->get(ProductAlertController::class);
         $this->context = Context::createDefaultContext();
         $this->salesChannel = $this->retrieveContext()->getSalesChannelId();
         $this->productCreator = new ProductCreator($this->getContainer());

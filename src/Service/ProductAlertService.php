@@ -45,10 +45,12 @@ class ProductAlertService
     }
 
     /**
-     * @return void
+     * @return int
      */
-    public function process(): void
+    public function process(): int
     {
+        $affected = 0;
+
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter(ProductAlertEntityDefinition::FIELD_IS_SENT, 0))
             ->addAssociation('salesChannel')
@@ -75,8 +77,10 @@ class ProductAlertService
                 ],
                 Context::createDefaultContext()
             );
+
+            $affected++;
         }
 
-        return;
+        return $affected;
     }
 }

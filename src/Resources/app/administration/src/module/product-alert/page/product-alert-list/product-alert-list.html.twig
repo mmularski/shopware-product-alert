@@ -1,19 +1,48 @@
 {% block product_alert_list %}
-    <sw-page class="product-alert-list">
-        <template slot="content">
-            {% block product_alert_list_content %}
-                <div class="sw-promotion-list__content">
-                    {% block product_alert_list_content_grid %}
-                        <sw-entity-listing
-                                v-if="rows"
-                                :items="rows"
-                                :repository="repository"
-                                :showSelection="false"
-                                :columns="columns">
-                        </sw-entity-listing>
-                    {% endblock %}
-                </div>
+<sw-page class="product-alert-list">
+    <template slot="smart-bar-actions">
+        <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                @process-finish="processFinish"
+                @click="showModal">
+            {{ $t('product-alert.process.buttonText') }}
+        </sw-button-process>
+    </template>
+    <template slot="content">
+        {% block product_alert_list_modal %}
+        <sw-modal v-if="modalVisible"
+                  :title="$tc('product-alert.process.modal.title')"
+                  variant="small"
+                  @modal-close="closeModal">
+
+            <p>{{ $tc('product-alert.process.modal.confirmation') }}</p>
+
+            <template slot="modal-footer">
+                <sw-button @click="processAlerts" variant="primary" size="small">
+                    {{ $tc('product-alert.process.modal.buttonProcess') }}
+                </sw-button>
+
+                <sw-button @click="closeModal" size="small">
+                    {{ $tc('product-alert.process.modal.buttonCancel') }}
+                </sw-button>
+            </template>
+        </sw-modal>
+        {% endblock %}
+        {% block product_alert_list_content %}
+        <div class="sw-promotion-list__content">
+            {% block product_alert_list_content_grid %}
+            <sw-entity-listing
+                    v-if="rows"
+                    :items.sync="rows"
+                    :repository="repository"
+                    :showSelection="false"
+                    :columns="columns">
+            </sw-entity-listing>
             {% endblock %}
-        </template>
-    </sw-page>
+        </div>
+        {% endblock %}
+    </template>
+</sw-page>
 {% endblock %}

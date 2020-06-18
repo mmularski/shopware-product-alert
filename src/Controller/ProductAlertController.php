@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class ProductAlert
+ * Class ProductAlertController
  */
-class ProductAlert extends AbstractController
+class ProductAlertController extends AbstractController
 {
     /**
      * @var ProductAlertPersistor

@@ -11,6 +11,18 @@
       "nameLabel": "Product Name",
       "countLabel": "Number of subscribers for out of stock notification",
       "countLabelPlaceholder": "Calculating..."
+    },
+    "process": {
+      "started": "Processing notifications...",
+      "success": "{count} notifications has been sent successfully.",
+      "error": "Unable to process notifications.",
+      "buttonText": "Send notifications manually",
+      "modal": {
+        "confirmation": "Are you sure you want to process notifications manually?",
+        "buttonProcess": "Process",
+        "buttonCancel": "Cancel",
+        "title": "Confirmation"
+      }
     }
   }
 }
