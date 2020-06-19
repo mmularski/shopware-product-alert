@@ -8,7 +8,7 @@
 
 namespace Divante\ProductAlert\Controller;
 
-use Divante\ProductAlert\Service\ProductAlertService;
+use Divante\ProductAlert\Service\ProductAlertServiceInterface;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,16 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ManualSendController extends AbstractController
 {
     /**
-     * @var ProductAlertService
+     * @var ProductAlertServiceInterface
      */
     private $productAlertService;
 
     /**
      * ManualSendController constructor.
      *
-     * @param ProductAlertService $productAlertService
+     * @param ProductAlertServiceInterface $productAlertService
      */
-    public function __construct(ProductAlertService $productAlertService)
+    public function __construct(ProductAlertServiceInterface $productAlertService)
     {
         $this->productAlertService = $productAlertService;
     }

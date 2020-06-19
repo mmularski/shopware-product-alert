@@ -10,6 +10,7 @@ namespace Divante\ProductAlert;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
 
@@ -31,16 +32,40 @@ class DivanteProductAlert extends Plugin
             return;
         }
 
-        $sql = <<<SQL
-DROP TABLE IF EXISTS `product_alert`;
-DELETE FROM `mail_template` WHERE `mail_template_type_id` IN (SELECT `id` FROM `mail_template_type` WHERE `technical_name`=`product.stock.alert`);
-DELETE FROM `mail_template_type` WHERE `technical_name`=`product.stock.alert`;
-SQL;
-
         /** @var Connection $connection */
         $connection = $this->container->get(Connection::class);
-        $connection->exec($sql);
+
+        $this->cleanData($connection);
 
         parent::uninstall($context);
+    }
+
+    /**
+     * @param Connection $connection
+     *
+     * @return void
+     *
+     * @throws DBALException
+     * @throws InvalidArgumentException
+     */
+    private function cleanData(Connection $connection): void
+    {
+        $connection->exec('DROP TABLE IF EXISTS `product_alert`');
+
+        $ids = $connection->createQueryBuilder()
+            ->select('id')
+            ->from('mail_template_type')
+            ->where('technical_name = :technicalName')
+            ->setParameter('technicalName', 'product.stock.alert')
+            ->execute()
+            ->fetchAll(\PDO::FETCH_COLUMN);
+
+        $connection->createQueryBuilder()
+            ->delete('mail_template')
+            ->where('mail_template_type_id IN(:ids)')
+            ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY)
+            ->execute();
+
+        $connection->delete('mail_template_type', ['technical_name' => 'product.stock.alert']);
     }
 }

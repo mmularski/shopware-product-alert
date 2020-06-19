@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * Class ProductAlertValidator
  */
-class ProductAlertValidator
+class ProductAlertValidator implements ProductAlertValidatorInterface
 {
     /**
      * @var DataValidator
@@ -50,10 +50,7 @@ class ProductAlertValidator
     }
 
     /**
-     * @param DataBag $data
-     * @param Context $context
-     *
-     * @return void
+     * {@inheritDoc}
      *
      * @throws AlreadySignedException
      */

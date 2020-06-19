@@ -8,7 +8,7 @@
 
 namespace Divante\ProductAlert\Controller;
 
-use Divante\ProductAlert\Service\SalesChannel\ProductAlertPersistor;
+use Divante\ProductAlert\Service\SalesChannel\ProductAlertPersistorInterface;
 use Divante\ProductAlert\Service\SalesChannel\Validation\Exception\AlreadySignedException;
 use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\Context;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductAlertController extends AbstractController
 {
     /**
-     * @var ProductAlertPersistor
+     * @var ProductAlertPersistorInterface
      */
     private $productAlertService;
 
@@ -36,10 +36,10 @@ class ProductAlertController extends AbstractController
     /**
      * ProductAlert constructor.
      *
-     * @param ProductAlertPersistor $productAlertService
+     * @param ProductAlertPersistorInterface $productAlertService
      * @param LoggerInterface $logger
      */
-    public function __construct(ProductAlertPersistor $productAlertService, LoggerInterface $logger)
+    public function __construct(ProductAlertPersistorInterface $productAlertService, LoggerInterface $logger)
     {
         $this->productAlertService = $productAlertService;
         $this->logger = $logger;
@@ -63,7 +63,7 @@ class ProductAlertController extends AbstractController
         ];
 
         try {
-            $this->productAlertService->insert($request, $context);
+            $this->productAlertService->subscribe($request, $context);
         } catch (AlreadySignedException $ex) {
             $response['error'] = true;
             $response['message'] = $ex->getMessage();

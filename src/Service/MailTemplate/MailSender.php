@@ -10,7 +10,7 @@ namespace Divante\ProductAlert\Service\MailTemplate;
 
 use Divante\ProductAlert\ProductAlert\ProductAlertEntity;
 use Shopware\Core\Content\MailTemplate\MailTemplateEntity;
-use Shopware\Core\Content\MailTemplate\Service\MailService;
+use Shopware\Core\Content\MailTemplate\Service\MailServiceInterface;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
@@ -20,13 +20,13 @@ use Shopware\Core\Framework\Validation\DataBag\DataBag;
 /**
  * Class MailSender
  */
-class MailSender
+class MailSender implements MailSenderInterface
 {
     /** @var string */
     public const EMAIL_TEMPLATE_TECHNICAL_NAME = 'product.stock.alert';
 
     /**
-     * @var MailService
+     * @var MailServiceInterface
      */
     private $mailService;
 
@@ -38,10 +38,10 @@ class MailSender
     /**
      * MailSender constructor.
      *
-     * @param MailService $mailService
+     * @param MailServiceInterface $mailService
      * @param EntityRepositoryInterface $mailTemplateRepository
      */
-    public function __construct(MailService $mailService, EntityRepositoryInterface $mailTemplateRepository)
+    public function __construct(MailServiceInterface $mailService, EntityRepositoryInterface $mailTemplateRepository)
     {
         $this->mailService = $mailService;
         $this->mailTemplateRepository = $mailTemplateRepository;
