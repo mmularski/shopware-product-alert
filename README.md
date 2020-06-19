@@ -46,6 +46,14 @@ If product is out of stock, a user can sign to product alert notification which 
     
     ![Admin email template](media/admin_mail_template.png "Admin email template")
 
+#### CLI
+
+You can use CLI command to send notifications manually
+                        
+```bash
+$ bin/console product:alert:send
+```
+
 ### Compatibility
 This plugin is compatible with Shopware 6.2
 
