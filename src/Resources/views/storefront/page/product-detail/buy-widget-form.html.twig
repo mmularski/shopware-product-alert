@@ -8,7 +8,7 @@
         {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
         {% set product = page.product %}
 
-        {% if product.stock <= 0 %}
+        {% if product.isCloseout and product.availableStock < product.minPurchase %}
             <br>
             <div class="product-detail-product-alert">
                 <div class="product-detail-ordernumber-container">
