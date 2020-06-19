@@ -23,12 +23,6 @@ If product is out of stock, a user can sign to product alert notification which 
 - Scheduled task for sending notifications (every 24 hours)
 - Button in admin panel which can process notifications manually
 
-### Configuration
-The only configuration you need to make is to set up newly created InPost shipping method. You can configure this
-method as any other - it is up to you. The minimum configuration you have to do is to enable InPost method and assign
-it to desired sales channels. Shopware 6 user documentation provides information how to do it 
-(https://docs.shopware.com/en/shopware-6-en/settings/shipping?category=shopware-6-en/settings/shop).
-
 ### Usage
 
 #### Storefront
