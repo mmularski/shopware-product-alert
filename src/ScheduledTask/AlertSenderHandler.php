@@ -8,7 +8,7 @@
 
 namespace Divante\ProductAlert\ScheduledTask;
 
-use Divante\ProductAlert\Service\ProductAlertService;
+use Divante\ProductAlert\Service\ProductAlertServiceInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\MessageQueue\ScheduledTask\ScheduledTaskHandler;
 
@@ -18,7 +18,7 @@ use Shopware\Core\Framework\MessageQueue\ScheduledTask\ScheduledTaskHandler;
 class AlertSenderHandler extends ScheduledTaskHandler
 {
     /**
-     * @var ProductAlertService
+     * @var ProductAlertServiceInterface
      */
     private $productAlertService;
 
@@ -26,11 +26,11 @@ class AlertSenderHandler extends ScheduledTaskHandler
      * AlertSenderHandler constructor.
      *
      * @param EntityRepositoryInterface $scheduledTaskRepository
-     * @param ProductAlertService $productAlertService
+     * @param ProductAlertServiceInterface $productAlertService
      */
     public function __construct(
         EntityRepositoryInterface $scheduledTaskRepository,
-        ProductAlertService $productAlertService
+        ProductAlertServiceInterface $productAlertService
     ) {
         parent::__construct($scheduledTaskRepository);
 

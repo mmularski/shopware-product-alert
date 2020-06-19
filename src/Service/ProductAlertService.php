@@ -20,7 +20,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 /**
  * Class ProductAlertService
  */
-class ProductAlertService
+class ProductAlertService implements ProductAlertServiceInterface
 {
     /**
      * @var EntityRepositoryInterface
@@ -47,7 +47,7 @@ class ProductAlertService
     }
 
     /**
-     * @return int
+     * @inheritDoc
      */
     public function process(): int
     {

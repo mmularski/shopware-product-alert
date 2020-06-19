@@ -20,7 +20,7 @@ class AlertSender extends ScheduledTask
      */
     public static function getTaskName(): string
     {
-        return 'mularski.alert_sender';
+        return 'divante.product_alert_sender';
     }
 
     /**

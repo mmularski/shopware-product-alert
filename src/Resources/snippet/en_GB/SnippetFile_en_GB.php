@@ -44,7 +44,7 @@ class SnippetFile_en_GB implements SnippetFileInterface
      */
     public function getAuthor(): string
     {
-        return 'Marek Mularczyk';
+        return 'Divante LTD, Marek Mularczyk';
     }
 
     /**

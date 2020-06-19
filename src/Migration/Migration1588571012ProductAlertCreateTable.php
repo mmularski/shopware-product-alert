@@ -56,18 +56,9 @@ SQL;
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return void
-     *
-     * @throws DBALException
+     * @inheritDoc
      */
     public function updateDestructive(Connection $connection): void
     {
-        $query = <<<SQL
-DROP DATABASE IF EXISTS `product_alert`;
-SQL;
-
-        $connection->executeQuery($query);
     }
 }

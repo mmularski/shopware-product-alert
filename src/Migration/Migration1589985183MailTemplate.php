@@ -44,14 +44,6 @@ class Migration1589985183MailTemplate extends MigrationStep
 
     /**
      * @param Connection $connection
-     */
-    public function updateDestructive(Connection $connection): void
-    {
-        // implement update destructive
-    }
-
-    /**
-     * @param Connection $connection
      * @param string $locale
      *
      * @return string|null
@@ -212,5 +204,12 @@ MAIL;
         Yours sincerely
         Your {{ shopName }}-Team
 MAIL;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function updateDestructive(Connection $connection): void
+    {
     }
 }

@@ -8,7 +8,7 @@
 
 namespace Divante\ProductAlert\Command;
 
-use Divante\ProductAlert\Service\ProductAlertService;
+use Divante\ProductAlert\Service\ProductAlertServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,17 +24,16 @@ class SendAlertsCommand extends Command
     protected static $defaultName = 'product:alert:send';
 
     /**
-     * @var ProductAlertService
+     * @var ProductAlertServiceInterface
      */
     private $productAlertService;
 
     /**
      * SendAlertsCommand constructor.
      *
-     * @param ProductAlertService $productAlertService
-     * @param null $name
+     * @param ProductAlertServiceInterface $productAlertService
      */
-    public function __construct(ProductAlertService $productAlertService)
+    public function __construct(ProductAlertServiceInterface $productAlertService)
     {
         parent::__construct();
 
@@ -45,7 +44,7 @@ class SendAlertsCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|void|null
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
