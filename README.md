@@ -11,7 +11,7 @@ If product is out of stock, a user can sign to product alert notification which 
 * [Setup](#setup)
 * [Tests](#tests)
 * [Licensing](#licensing)
-* [About the Author](#about the author)
+* [About the Author](#about-the-author)
 
 ## Documentation
 
