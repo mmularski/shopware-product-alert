@@ -6,6 +6,8 @@
  * @license See LICENSE_DIVANTE.txt for license details.
  */
 
+namespace Divante\ProductAlert\Test\Integration;
+
 use Divante\ProductAlert\Controller\ProductAlertController;
 use Divante\ProductAlert\ProductAlert\ProductAlertEntityDefinition;
 use Divante\ProductAlert\Test\Integration\Utils\ProductCreator;
