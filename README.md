@@ -1,8 +1,8 @@
 # Product Alert extension
 
-This extension provides a functionality of "Out of stock notification".
+This extension provides the functionality of "Out of stock notification".
 
-If product is out of stock, a user can sign to product alert notification which sends an email when this product is back to stock
+If a product is out of stock, a user can sign to product alert notification which sends an email when this product is back to stock
 
 
 ## Table of content
@@ -16,12 +16,12 @@ If product is out of stock, a user can sign to product alert notification which 
 ## Documentation
 
 ### Features
-- New form for customers who want to sign for notification when product will back to stock
-- Grid in admin panel with list of subscribers and products
-- Details how many subscribers are signed for specific product
+- New form for customers who want to sign for notification when the product will back to stock
+- A grid in admin panel with a list of subscribers and products
+- Details how many subscribers are signed for a specific product
 - Customizable email template
-- Scheduled task for sending notifications (every 24 hours)
-- Button in admin panel which can process notifications manually
+- The scheduled task for sending notifications (every 24 hours)
+- Button in the admin panel which can process notifications manually
 
 ### Usage
 
@@ -63,7 +63,7 @@ This plugin is compatible with Shopware 6.2
 #### Using Composer (recommended)
 Run `composer require divante/product-alert` in your project root directory
 #### Copying files
-Copy files from this repository (you can clone it or download as zip) to `<root>/custom/plugins/DivanteInPost`
+Copy files from this repository (you can clone it or download as zip) to `<root>/custom/plugins/DivanteProductAlert`
 ### Installation
 
 Refresh plugin list
