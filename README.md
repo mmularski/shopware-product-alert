@@ -31,18 +31,18 @@ If a product is out of stock, a user can sign to product alert notification whic
     ![Form on a product page](media/storefront_product_page.png "Form on a product page")
 
 #### Admin panel
-1. As an admin, you can view emails which are subscribed for specific product.
+1. As an admin, you can view emails that are subscribed for a specific product.
 
     ![Admin grid](media/admin_grid.png "Admin grid")
 
-2. After clicking for some row, you can view how many subscribers are signed for this specific product(fir statistics purposes).
+2. After clicking for some row, you can view how many subscribers are signed for this specific product(for statistics purposes).
 
     ![Admin grid details](media/admin_grid_details.png "Admin grid details")
 
-3. Also if admin wants to send notifications manually, it can be done by clicking button above grid.
+3. Also if the admin wants to send notifications manually, it can be done by clicking the button above the grid.
    **(By default there is a scheduled task which sends notifications every 24 hours)**
     
-4. Module has its own email template for notification, so admin can customize it for its needs.
+4. The module has its own email template for notification, so the admin can customize it for its needs.
     
     ![Admin email template](media/admin_mail_template.png "Admin email template")
 
